@@ -11,6 +11,7 @@ My goals this year are the following:
 ### Possible Languages:
 Interested
 - Koka https://koka-lang.github.io/koka/doc/book.html
+- mun
 - Eff
 - elixir https://elixir-lang.org/
 - crystal
