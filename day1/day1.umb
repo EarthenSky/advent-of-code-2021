@@ -1,0 +1,31 @@
+# NOTE: should all this sytax stuff be in sugar? -> what if we dump the sucky syntax in sugar so that beginners can use it?
+import sugar
+
+import standard
+
+fn part1 string input {
+	# NOTE: should we do chaining with . instead of a stdlib function?
+    lines = input.split.map int
+	
+	num = 0
+	for i in 1 to lines.len {
+		num += 1 if lines[i] > lines[i-1] else 0
+	}
+
+    println "part1: ", num
+}
+
+fn part2 string input {
+    lines = input.split.map int
+	
+	num = 0
+	for i in 1 to lines.len {
+		num += 1 if lines[i] > lines[i-3] else 0
+	}
+
+    println "part2: ", num
+}
+
+input = read("input").strip()
+part1 input
+part2 input
