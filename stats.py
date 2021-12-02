@@ -60,8 +60,8 @@ for day, file in zip(days, main_files):
 
 US_TO_MS = 1 / (1000 * 1000)
 
+print("\n## output:")
 for el in days_data:
-	print("\n## output:")
 	print("{}: {} lines across {} file(s)".format(el["day"], el["lines"], el["files"]))
 	print("\ttook {}ms".format(el["avg_time"] * US_TO_MS))
 	#print("\tpart2 took {}ms".format(el["avg_time1"]))

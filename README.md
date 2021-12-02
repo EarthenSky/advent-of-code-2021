@@ -18,7 +18,7 @@ Interested
 - dart
 - perl
 - vala https://learnxinyminutes.com/docs/vala/ (is pretty much C#)
-- **nim** 
+- nim \*\* 
 - cone
 - pen
 

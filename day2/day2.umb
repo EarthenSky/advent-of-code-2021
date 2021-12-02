@@ -1,0 +1,98 @@
+# do I want to make it so that all imports are done on tokens? -> maybe not? maybe imports just have to be done outside of scope. any imports under a function will generate warnings (that can be disabled)
+# import :standard
+import standard
+
+@ignore :case1 :object 
+on compiler
+
+# the "on" statement is kinda like a noop for tags. It lets you apply a tag on something without doing anything to it.
+
+# NOTE: we can define types using | notation.
+# the | operator... can be applied between any functions?
+# or... these are special functions? -> types are special & can be called like a function.
+# this looks shitty tho
+# myvar = (float | int | string) 0
+# ...
+# mytype = float | int | string # this is of type 'type'
+# myvar = mytype 0
+#
+# we can also create more complicated data structures, with object
+# NOTE: order matters
+# mycomplextype = float, int | char, string, mytype # is this okay?
+# mycomplextype2 = {float, int | char, string, mytype}
+# mycomplextype3 = (float, int | char, string, mytype) # is this okay? -> this actually depends on the first one, & I think yes! a continuation of our "optional structure" rule.
+# somecoolvar = mycomplextype { 0.1, 'z', "hey", "empty" }
+# somecoolvar2 = mycomplextype 0.1, 'z', "hey", "empty" # this okay?
+# ... do I really care that it continues to use {} ?
+# ... what if we just use parens?
+# 
+# we can also name the parameters:
+# besttypeNA = {float cupsflour, char | string units, string recipie}
+# besttypeNA2 = {
+#    float cupsbutter,
+#    float cupsflower,
+#    float cupswater,
+#    int num_chocolate_chips,
+#}
+
+# what if type names need to be CamelCase? 
+impl besttypeNA2 {
+
+    # is it okay to associate behaviours with data types?
+    # I think if we do it this way, its okay
+
+}
+
+# okay, maybe if we just have module based inheritance & polymorphism.. (in addition to function level), it'll be okay? 
+module cooltypes {
+    # TODO: this
+}
+
+# this would enable us to do python-like newline delimited blocks.
+# (among other things (os))
+# import sugar.python 
+
+fn part1(string input) {
+	depth, hoz = 0, 0
+
+    for line in input.split("\n") {
+        # we can decompose the list into its first two elements! 
+        cmd, v, _ = line.split(" ") 
+       
+        match cmd {
+            # we actually do something funky here so we don't 
+            # have to add the l/r strings. str can convert a 
+            # token into its string equivalent... somehow?
+            
+            str :forward -> hoz += v
+            str :down -> depth += v
+            str :up -> depth -= v
+        } 
+	}
+
+    println "part1: ", depth * hoz
+}
+
+fn part2(string input) {
+    depth, hoz, aim = 0, 0
+
+    for line in input.split("\n") {
+        # we can decompose the list into its first two elements! 
+        cmd, v, _ = line.split(" ") 
+       
+        match cmd {
+            str :forward -> {
+                hoz += v
+                depth += aim * v
+            }
+            str :down -> { aim += v }
+            str :up -> { aim -= v }
+        } 
+	}
+
+    println "part2: ", depth * hoz
+}
+
+input = read("input").strip()
+part1 input
+part2 input
