@@ -1,4 +1,4 @@
-import os
+import os, sys
 import time
 
 pwd_path = os.path.dirname(os.path.realpath(__file__))
@@ -6,6 +6,10 @@ pwd_path = os.path.dirname(os.path.realpath(__file__))
 main_files = ["day1.nim", "day2.nim", "day3.nim"]
 days = ["day{}".format(x+1) for x in range(0, 25)]
 days_data = []
+
+issetup = not "--nosetup" in sys.argv
+
+print(sys.argv)
 
 def files_in(directory):
     for file in os.listdir("/mydir"):
@@ -19,41 +23,42 @@ def lines_in_file(filename):
 # calc total line numbers 
 
 for day, file in zip(days, main_files):
-	current_data = {"day": day, "lines": 0, "files": 0}
+    current_data = {"day": day, "lines": 0, "files": 0}
    
-	path = "{}/{}/{}".format(pwd_path, day, file)
+    path = "{}/{}/{}".format(pwd_path, day, file)
  
-	if not os.path.isfile(path):
-		continue
+    if not os.path.isfile(path):
+        continue
 
-	current_data["lines"] += lines_in_file(path)
-	current_data["files"] += 1
+    current_data["lines"] += lines_in_file(path)
+    current_data["files"] += 1
 
-	days_data.append(current_data)
+    days_data.append(current_data)
 
-	# ---------------------------------------------------------- #
-	# calc time 
+    # ---------------------------------------------------------- #
+    # calc time 
 
-	print("\n### simulating {} ...".format(day))
+    print("\n### simulating {} ...".format(day))
 
-	# TODO: calculate estimated error bounds.
-	TIMES = 1
+    # TODO: calculate estimated error bounds.
+    TIMES = 1
 
-	current_data["times"] = []
-	for i in range(0, TIMES):
-		# NOTE: each day must have these scripts (after the fact is okay)
-		run = "cd {}/{}/; ./run.sh".format(pwd_path, day)
-		setup = "cd {}/{}/; ./setup.sh".format(pwd_path, day)
+    current_data["times"] = []
+    for i in range(0, TIMES):
+        # NOTE: each day must have these scripts (after the fact is okay)
+        run = "cd {}/{}/; ./run.sh".format(pwd_path, day)
+        setup = "cd {}/{}/; ./setup.sh".format(pwd_path, day)
 
-		os.system(setup)	
+        if issetup:
+            os.system(setup)	
 
-		start = time.monotonic_ns() 
-		os.system(run)	
-		elapsed = time.monotonic_ns() - start
+        start = time.monotonic_ns() 
+        os.system(run)	
+        elapsed = time.monotonic_ns() - start
 
-		current_data["times"] += [elapsed]
+        current_data["times"] += [elapsed]
 
-	current_data["avg_time"] = sum(current_data["times"])/TIMES
+    current_data["avg_time"] = sum(current_data["times"])/TIMES
 
 # -------------------------------------------------------------- #
 # output
@@ -66,3 +71,8 @@ for el in days_data:
 	print("\ttook {}ms".format(el["avg_time"] * US_TO_MS))
 	#print("\tpart2 took {}ms".format(el["avg_time1"]))
 
+sum_time = 0
+for el in days_data:
+    sum_time += el["avg_time"] * US_TO_MS
+
+print("total took: {}ms".format(sum_time))
