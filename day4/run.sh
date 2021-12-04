@@ -1,1 +1,1 @@
-elixir day3.exs # performance is probably gonna be fiiiiine
+elixir day4.exs # performance is probably gonna be fiiiiine

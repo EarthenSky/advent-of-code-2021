@@ -3,13 +3,11 @@ import time
 
 pwd_path = os.path.dirname(os.path.realpath(__file__))
 
-main_files = ["day1.nim", "day2.nim", "day3.nim"]
+main_files = ["day1.nim", "day2.nim", "day3.nim", "day4.exs"]
 days = ["day{}".format(x+1) for x in range(0, 25)]
 days_data = []
 
 issetup = not "--nosetup" in sys.argv
-
-print(sys.argv)
 
 def files_in(directory):
     for file in os.listdir("/mydir"):
@@ -41,16 +39,15 @@ for day, file in zip(days, main_files):
     print("\n### simulating {} ...".format(day))
 
     # TODO: calculate estimated error bounds.
-    TIMES = 1
+    TIMES = 5
+
+    setup = "cd {}/{}/; ./setup.sh".format(pwd_path, day)
+    if issetup: os.system(setup)	
 
     current_data["times"] = []
     for i in range(0, TIMES):
         # NOTE: each day must have these scripts (after the fact is okay)
         run = "cd {}/{}/; ./run.sh".format(pwd_path, day)
-        setup = "cd {}/{}/; ./setup.sh".format(pwd_path, day)
-
-        if issetup:
-            os.system(setup)	
 
         start = time.monotonic_ns() 
         os.system(run)	
