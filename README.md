@@ -12,11 +12,11 @@ Interested
 - Koka https://koka-lang.github.io/koka/doc/book.html
 - mun
 - Eff
-- elixir https://elixir-lang.org/
+- elixir \*\* oh god why did I attempt this 
 - crystal
 - Nix
 - dart
-- perl
+- perl \*\* https://xkcd.com/519/
 - vala https://learnxinyminutes.com/docs/vala/ (is pretty much C#)
 - nim \*\* 
 - cone

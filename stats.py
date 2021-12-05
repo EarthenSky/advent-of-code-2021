@@ -3,7 +3,7 @@ import time
 
 pwd_path = os.path.dirname(os.path.realpath(__file__))
 
-main_files = ["day1.nim", "day2.nim", "day3.nim", "day4.exs"]
+main_files = ["day1.nim", "day2.nim", "day3.nim", "day4.exs", "day5.pl"]
 days = ["day{}".format(x+1) for x in range(0, 25)]
 days_data = []
 
@@ -39,21 +39,23 @@ for day, file in zip(days, main_files):
     print("\n### simulating {} ...".format(day))
 
     # TODO: calculate estimated error bounds.
-    TIMES = 5
+    TIMES = 1
 
     setup = "cd {}/{}/; ./setup.sh".format(pwd_path, day)
-    if issetup: os.system(setup)	
+    if issetup: os.system(setup)
 
     current_data["times"] = []
     for i in range(0, TIMES):
         # NOTE: each day must have these scripts (after the fact is okay)
         run = "cd {}/{}/; ./run.sh".format(pwd_path, day)
-
+        
         start = time.monotonic_ns() 
         os.system(run)	
         elapsed = time.monotonic_ns() - start
+        time.sleep(0.001)
 
         current_data["times"] += [elapsed]
+        
 
     current_data["avg_time"] = sum(current_data["times"])/TIMES
 
