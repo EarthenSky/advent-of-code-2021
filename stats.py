@@ -3,7 +3,7 @@ import time
 
 pwd_path = os.path.dirname(os.path.realpath(__file__))
 
-main_files = ["day1.nim", "day2.nim", "day3.nim", "day4.exs", "day5.pl"]
+main_files = ["day1.nim", "day2.nim", "day3.nim", "day4.exs", "day5.pl", "day6.nim"]
 days = ["day{}".format(x+1) for x in range(0, 25)]
 days_data = []
 
