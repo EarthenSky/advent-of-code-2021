@@ -3,7 +3,7 @@ import time
 
 pwd_path = os.path.dirname(os.path.realpath(__file__))
 
-main_files = ["day1.nim", "day2.nim", "day3.nim", "day4.exs", "day5.pl", "day6.nim"]
+main_files = [["day1.nim"], ["day2.nim"], ["day3.nim"], ["day4.exs"], ["day5.pl"], ["day6.nim"], ["part1.py", "part2.py"], ["day8.v"]]
 days = ["day{}".format(x+1) for x in range(0, 25)]
 days_data = []
 
@@ -20,16 +20,16 @@ def lines_in_file(filename):
 # -------------------------------------------------------------- #
 # calc total line numbers 
 
-for day, file in zip(days, main_files):
+for day, file_list in zip(days, main_files):
     current_data = {"day": day, "lines": 0, "files": 0}
    
-    path = "{}/{}/{}".format(pwd_path, day, file)
- 
-    if not os.path.isfile(path):
-        continue
+    for file in file_list: 
+        path = "{}/{}/{}".format(pwd_path, day, file)
+        if not os.path.isfile(path):
+            continue
 
-    current_data["lines"] += lines_in_file(path)
-    current_data["files"] += 1
+        current_data["lines"] += lines_in_file(path)
+        current_data["files"] += 1
 
     days_data.append(current_data)
 

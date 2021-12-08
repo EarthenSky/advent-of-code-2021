@@ -16,11 +16,12 @@ Interested
 - crystal
 - Nix
 - dart
-- perl \*\* https://xkcd.com/519/
+- perl \*\* i dislike syntax, but relatively easy to figure out; https://xkcd.com/519/
 - vala https://learnxinyminutes.com/docs/vala/ (is pretty much C#)
-- nim \*\* 
+- nim \*\* syntax is... a bit weird & inconsistent. Definitely *not* minimal however.
 - cone
 - pen
+- V \*\* wow, pretty impressive
 
 Somewhat Interested
 - TypeScript
@@ -34,3 +35,7 @@ Somewhat Interested
 - erlang
 - julia
 
+
+### Notes:
+- day7 I had to do the problem while tranferring between trains & busses & my phone, so I used python. (My phone has ish which is ~300-70 times slower than wsl, which is why I couldn't feasibly do a fast O(n^2) solution)
+- 
