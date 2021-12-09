@@ -7,7 +7,7 @@ fn main() {
 		println("open file failed")
 		return
 	}
-	//part1(input)
+	part1(input)
 	part2(input)
 }
 
@@ -20,9 +20,7 @@ fn custom_to_int(ch string, mapping map[string]string) int {
 		return 7
 	} else if ch.len == 7 {
 		return 8
-	} 
-
-	if ch.len == 5 {
+	} else if ch.len == 5 {
 		if ch.contains(mapping['b']) {
 			return 5
 		} else if !ch.contains(mapping['f']) {
@@ -32,13 +30,10 @@ fn custom_to_int(ch string, mapping map[string]string) int {
 		}
 	} else {
 		if !ch.contains(mapping['e']) {
-			println("9: $mapping, $ch")
 			return 9
 		} else if !ch.contains(mapping['c']) {
-			println("6: $mapping, $ch")
 			return 6
 		} else {
-			println("0: $mapping, $ch")
 			return 0
 		}
 	}
@@ -51,10 +46,7 @@ fn part1(input string) {
 
 	for line in input.split("\n") {
 		halves := line.split(" | ")
-		left := halves[0]
 		right := halves[1]
-
-		left_list := left.split(" ")
 		right_list := right.split(" ")
 
 		for item in right_list {
@@ -68,14 +60,14 @@ fn part1(input string) {
 }
 
 fn part2(input string) {
-	mut times := 0
+	mut sum := 0
 
 	for line in input.split("\n") {
 		halves := line.split(" | ")
 		left := halves[0]
 		right := halves[1]
 
-		left_list := left.split(" ") // bug unused
+		left_list := left.split(" ") // bug unused?
 		right_list := right.split(" ")
 		
 		mut mapping := map[string]string{}
@@ -94,15 +86,8 @@ fn part2(input string) {
 				4 {four = item}
 				5 {five << item}
 				6 {six << item}
-				7 {seven = item} // bug with warning seven unused (off by one probably)
+				7 {seven = item}
 				else {}
-			}
-		}
-
-		// note: this is not actually needed
-		for ch in three {
-			if !(two.contains(ch.ascii_str())) { // bug with ch.str() !in two
-				mapping['a'] = ch.ascii_str()
 			}
 		}
 		
@@ -120,21 +105,16 @@ fn part2(input string) {
 			}
 		}
 
-		//mut zero_poss := ""
 		mut nine_poss := ""
 		for s in six {
 			mut num := 0
-			mut thech := ""
 			for ch in s {
 				if four.contains(ch.ascii_str()) { // error for unnecesary syntax?
 					num += 1
 				}
 			}
 
-			if num == 3 {
-				//zero_poss = s
-				//mapping['d'] = thech
-			} else {
+			if num != 3 {
 				nine_poss = s
 			}
 		}
@@ -146,8 +126,23 @@ fn part2(input string) {
 				mapping['e'] = ch.ascii_str()
 			}
 		}
+		
+		for s in six {
+			mut num := 0
+			mut thech := ""
+			for ch in two {
+				if s.contains(ch.ascii_str()) {
+					num += 1
+					thech = ch.ascii_str()
+				}
+			}
 
-		mut six_poss := ""
+			if num == 1 {
+				mapping['f'] = thech
+			} 
+		}
+
+		// NOTE: this is kinda inefficient now?
 		mut zero_poss := ""
 		for s in six {
 			mut num := 0
@@ -159,29 +154,7 @@ fn part2(input string) {
 				}
 			}
 
-			if num == 1 {
-				six_poss = s
-				mapping['f'] = thech
-			} else {
-				zero_poss = s
-			}
-		}
-
-		// NOTE: this is really inefficient
-		for s in six {
-			mut num := 0
-			mut thech := ""
-			for ch in two {
-				if s.contains(ch.ascii_str()) {
-					num += 1
-					thech = ch.ascii_str()
-				}
-			}
-
-			if num == 1 {
-				six_poss = s
-				mapping['f'] = thech
-			} else {
+			if num != 1 {
 				zero_poss = s
 				for ch in two {
 					if ch.ascii_str() != mapping['f'] {
@@ -192,32 +165,18 @@ fn part2(input string) {
 			}
 		}
 
-		println("+z: $zero_poss")
-		println("_s: $six_poss")
-
 		for ch in zero_poss {
 			if !(three.contains(ch.ascii_str())) && !(eight_poss.contains(ch.ascii_str())) {
 				mapping['b'] = ch.ascii_str()
-				println("here")
 			}
 		}
 
-		//for ch in six_poss {
-		//	if !(nine_poss.contains(ch.ascii_str())) {
-		//		mapping['e'] = ch.ascii_str()
-		//	}
-		//}
-
-
-		v := custom_to_int(right_list[0], mapping) * 1000 + custom_to_int(right_list[1],mapping) * 100 + custom_to_int(right_list[2],mapping) * 10 + custom_to_int(right_list[3],mapping) * 1
-
-		times += custom_to_int(right_list[0], mapping) * 1000
-		times += custom_to_int(right_list[1],mapping) * 100
-		times += custom_to_int(right_list[2],mapping) * 10
-		times += custom_to_int(right_list[3],mapping) * 1
-		println("$v")
+		sum += custom_to_int(right_list[0], mapping) * 1000
+		sum += custom_to_int(right_list[1],mapping) * 100
+		sum += custom_to_int(right_list[2],mapping) * 10
+		sum += custom_to_int(right_list[3],mapping) * 1
 
 	}
 
-	println("part2: $times")
+	println("part2: $sum")
 }

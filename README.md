@@ -4,7 +4,7 @@ These are my solutions to the advent-of-code 2021 problems
 ### Goals:
 My goals this year are the following:
 - use more than 10 different programming languages
-- the total number of lines needed to solve all problems should be less than 3000 -> ~120 lines per program on average
+- the total number of lines needed to solve all problems should be less than 3000 -> ~:120 lines per program on average
 - all problems must run in less than 45s total -> 1.5s per program on average
 
 ### Possible Languages:
@@ -21,7 +21,7 @@ Interested
 - nim \*\* syntax is... a bit weird & inconsistent. Definitely *not* minimal however.
 - cone
 - pen
-- V \*\* wow, pretty impressive
+- V \*\* wow, would be pretty impressive if it wasn't so buggy
 
 Somewhat Interested
 - TypeScript

@@ -3,7 +3,10 @@ import time
 
 pwd_path = os.path.dirname(os.path.realpath(__file__))
 
-main_files = [["day1.nim"], ["day2.nim"], ["day3.nim"], ["day4.exs"], ["day5.pl"], ["day6.nim"], ["part1.py", "part2.py"], ["day8.v"]]
+main_files = [
+    ["day1.nim"], ["day2.nim"], ["day3.nim"], ["day4.exs"], 
+    ["day5.pl"], ["day6.nim"], ["part1.py", "part2.py"], 
+    ["day8.v"], ["day9.v"]]
 days = ["day{}".format(x+1) for x in range(0, 25)]
 days_data = []
 
@@ -74,4 +77,8 @@ sum_time = 0
 for el in days_data:
     sum_time += el["avg_time"] * US_TO_MS
 
-print("total took: {}ms".format(sum_time))
+sum_lines = 0
+for el in days_data:
+    sum_lines += el["lines"]
+print("total time:\t{}ms".format(sum_time))
+print("total lines:\t{}".format(sum_lines))
