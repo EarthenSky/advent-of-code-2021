@@ -1,0 +1,1 @@
+rlwrap sbcl --noinform --load day12.lisp --eval '(progn (write-line (write-to-string (main))) (sb-ext:quit))'
